@@ -12,4 +12,20 @@ export default config;
 const Template = (args) => <Card {...args} />;
 
 export const Primary = Template.bind({});
-Primary.args = { id: 1 };
+Primary.args = {
+  title: "Card Title",
+  imageUrl: "https://picsum.photos/id/1/300/200",
+  isFavorite: false,
+};
+
+export const Favorite = Template.bind({});
+Favorite.args = {
+  ...Primary.args,
+  isFavorite: true,
+};
+
+export const LongTitle = Template.bind({});
+LongTitle.args = {
+  ...Primary.args,
+  title: "This card is an extremely long title that causes wrapping",
+};
