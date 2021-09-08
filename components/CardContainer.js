@@ -15,7 +15,16 @@ const CardContainer = ({ id }) => {
 
   if (!data) return null;
 
-  return <Card title={data.title} imageUrl={data.url} />;
+  return (
+    <Card
+      title={data.title}
+      imageUrl={data.url}
+      isFavorite={!!data.favorite}
+      favoriteClickHandler={() =>
+        setData((prev) => ({ ...prev, favorite: !prev.favorite }))
+      }
+    />
+  );
 };
 
 export default CardContainer;

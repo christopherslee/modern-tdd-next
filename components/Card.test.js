@@ -25,13 +25,13 @@ describe("Card", () => {
     expect(favoriteValue).toEqual("false");
   });
 
-  test("clicking on heart saves as favorite", async () => {
-    render(<Primary />);
+  test("clicking on heart invokes handler", async () => {
+    const handler = jest.fn();
+
+    render(<Primary favoriteClickHandler={handler} />);
     var favoriteButton = screen.getByTestId("favoriteBtn");
     fireEvent.click(favoriteButton);
 
-    favoriteButton = screen.getByTestId("favoriteBtn");
-    const favoriteValue = favoriteButton.getAttribute("data-favorite");
-    expect(favoriteValue).toEqual("true");
+    expect(handler).toHaveBeenCalled();
   });
 });

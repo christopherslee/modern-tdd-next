@@ -1,16 +1,14 @@
 /* eslint-disable @next/next/no-img-element */
 import { useState } from "react";
 
-const Card = ({ title, imageUrl, isFavorite }) => {
-  const [fave, setFave] = useState(isFavorite);
-
+const Card = ({ title, imageUrl, isFavorite, favoriteClickHandler }) => {
   return (
     <div className="rounded border shadow py-2 px-4 m-2 w-full max-w-xs inline-block">
       <h1 className="text-gray-700 my-2 font-semibold">{title}</h1>
       <img src={imageUrl} className="rounded w-full h-40" alt="some picture" />
       <ul className="text-gray-400 mt-2">
         <li className="inline-block cursor-pointer">
-          {!fave && (
+          {!isFavorite && (
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-6 w-6"
@@ -19,9 +17,7 @@ const Card = ({ title, imageUrl, isFavorite }) => {
               stroke="currentColor"
               data-testid="favoriteBtn"
               data-favorite={false}
-              onClick={() => {
-                setFave(!fave);
-              }}
+              onClick={favoriteClickHandler}
             >
               <path
                 strokeLinecap="round"
@@ -31,7 +27,7 @@ const Card = ({ title, imageUrl, isFavorite }) => {
               />
             </svg>
           )}
-          {fave && (
+          {isFavorite && (
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-6 w-6"
@@ -39,9 +35,7 @@ const Card = ({ title, imageUrl, isFavorite }) => {
               fill="currentColor"
               data-testid="favoriteBtn"
               data-favorite={true}
-              onClick={() => {
-                setFave(!fave);
-              }}
+              onClick={favoriteClickHandler}
             >
               <path
                 fillRule="evenodd"

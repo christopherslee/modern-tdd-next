@@ -3,7 +3,13 @@
  */
 
 import React from "react";
-import { cleanup, fireEvent, render, screen } from "@testing-library/react";
+import {
+  cleanup,
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+} from "@testing-library/react";
 import { composeStories } from "@storybook/testing-react";
 import { initialize, mswDecorator } from "msw-storybook-addon";
 
@@ -25,5 +31,21 @@ describe("CardContainer", () => {
       })
     );
     expect(await screen.findByText("Hello Storybook!")).toBeTruthy();
+  });
+
+  test("clicking on heart toggles favorite status", async () => {
+    render(
+      mswDecorator(Primary, {
+        args: { id: 1 },
+        parameters: Primary.parameters,
+      })
+    );
+    var favoriteButton = await screen.findByTestId("favoriteBtn");
+    fireEvent.click(favoriteButton);
+
+    await waitFor(() => {
+      favoriteButton = screen.getByTestId("favoriteBtn");
+      return favoriteButton.getAttribute("data-favorite");
+    });
   });
 });
