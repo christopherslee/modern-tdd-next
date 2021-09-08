@@ -1,5 +1,5 @@
-import Card from "../components/Card";
+import CardContainer from "../components/CardContainer";
 
 export default function Home() {
-  return <Card id={1} />;
+  return <CardContainer id={1} />;
 }
