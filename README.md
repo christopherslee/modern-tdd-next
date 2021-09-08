@@ -1,34 +1,46 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# TDD with Jest, React Testing Library, Storybook, and MockServiceWorker
 
-## Getting Started
+Let's see if we can TDD our way through creating this card component. It displays some data from an API, and has a favorite button that can be toggled. For the purpose of this tutorial, we'll use mock data from the [JSON Placeholder Photo API](https://jsonplaceholder.typicode.com/photos) to get the card title, and [Picsum](https://picsum.photos) for some nicer images, even thought it's not strictly necessary.
 
-First, run the development server:
+![Mockup](docs/mockup.png)
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+This example won't include the usage of a React state management framework, but the same principals apply.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Step 1: UI Component
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+Many developers would start by translating the mockup into a non-functional UI. This is a great time to introduce Storybook, which will give us the ability to quickly visualize our new component and its props.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+Create `components/Card.stories.js` and `components/Card.js`. You should see this render in Storybook.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+Create Primary Story, then create Favorite and LongTitle Stories.
 
-## Learn More
+Discussion point: are there any enzyme tests here that provide a lot of value?
 
-To learn more about Next.js, take a look at the following resources:
+I would argue no, the test cases are our Stories, and Visual Regression could be a better assertion than what we could write as a unit test.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Step 2: Add favorite button interactivity
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Create `components/Card.test.js` and import the Primary Card Story.
 
-## Deploy on Vercel
+Write a test so that clicking button toggles favorite state.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+This isn't what we really want, but we'll come back to this.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+## Step 3: Fetch data from API
+
+My understanding here is that we are often using custom hooks for this, but I'm going to use a container pattern.
+
+Create `components/CardContainer.stories.js` and `components/CardContainer.js`
+
+Use https://jsonplaceholder.typicode.com/photos/1 to fetch `title` and `url`.
+
+Note: after this is implemented, you need to hard refresh Storybook once for MSW to take effect. Show this in the inspector.
+
+Create `components/CardContainer.test.js`
+
+## Step 4: Move the click handler to the container
+
+Showcase Storybook action mock
+
+When adding click handler to Card.js, don't forget to remove the state
