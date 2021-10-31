@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import Card from "./Card";
 
 const CardContainer = ({ id }) => {
+  const [favorite, setFavorite] = useState(false);
   const [data, setData] = useState({});
 
   useEffect(() => {
@@ -16,7 +17,16 @@ const CardContainer = ({ id }) => {
         });
       });
   }, [id]);
-  return <Card {...data} />;
+
+  return (
+    <Card
+      {...data}
+      isFavorite={favorite}
+      favoriteClickHandler={() => {
+        setFavorite(!favorite);
+      }}
+    />
+  );
 };
 
 export default CardContainer;

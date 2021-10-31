@@ -32,4 +32,30 @@ describe("CardContainer", () => {
     );
     expect(await screen.findByText("Mocked Title")).toBeTruthy();
   });
+
+  test("clicking favorite button toggles favorite status", async () => {
+    render(
+      mswDecorator(Primary, {
+        args: { id: 1 },
+        parameters: Primary.parameters,
+      })
+    );
+
+    var favoriteBtn = await screen.findByTestId("favoriteBtn");
+    expect(favoriteBtn.getAttribute("data-favorite")).toEqual("false");
+
+    await fireEvent.click(favoriteBtn);
+
+    await waitFor(() => {
+      favoriteBtn = screen.getByTestId("favoriteBtn");
+      expect(favoriteBtn.getAttribute("data-favorite")).toEqual("true");
+    });
+
+    await fireEvent.click(favoriteBtn);
+
+    await waitFor(() => {
+      favoriteBtn = screen.getByTestId("favoriteBtn");
+      expect(favoriteBtn.getAttribute("data-favorite")).toEqual("false");
+    });
+  });
 });

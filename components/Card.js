@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-const Card = ({ id, title, imageUrl, isFavorite }) => {
+const Card = ({ id, title, imageUrl, isFavorite, favoriteClickHandler }) => {
   return (
     <div className="rounded border shadow py-2 px-4 m-2 w-full max-w-xs inline-block">
       <h1 className="text-gray-700 my-2 font-semibold">{title}</h1>
@@ -12,6 +12,9 @@ const Card = ({ id, title, imageUrl, isFavorite }) => {
               className="h-6 w-6"
               viewBox="0 0 20 20"
               fill="currentColor"
+              data-testid="favoriteBtn"
+              data-favorite="true"
+              onClick={favoriteClickHandler}
             >
               <path
                 fillRule="evenodd"
@@ -27,6 +30,9 @@ const Card = ({ id, title, imageUrl, isFavorite }) => {
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
+              data-testid="favoriteBtn"
+              data-favorite="false"
+              onClick={favoriteClickHandler}
             >
               <path
                 strokeLinecap="round"

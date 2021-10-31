@@ -1,4 +1,5 @@
 import React from "react";
+import { action } from "@storybook/addon-actions";
 
 import Card from "./Card";
 
@@ -17,6 +18,7 @@ Primary.args = {
   title: "Hello EPIC Week",
   imageUrl: "https://picsum.photos/id/1/300/200",
   isFavorite: false,
+  favoriteClickHandler: action("favoriteClickHandler"),
 };
 
 export const LongText = Template.bind({});
