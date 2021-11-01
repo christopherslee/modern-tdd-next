@@ -2,7 +2,7 @@
 
 Let's see if we can TDD our way through creating this card component. It displays some data from an API, and has a favorite button that can be toggled. For the purpose of this tutorial, we'll use mock data from the [JSON Placeholder Photo API](https://jsonplaceholder.typicode.com/photos) to get the card title, and [Picsum](https://picsum.photos) for some nicer images, even thought it's not strictly necessary.
 
-![Mockup](docs/mockup.png)
+![Mockup](samples/mockup.png)
 
 This example won't include the usage of a React state management framework, but the same principals apply.
 
