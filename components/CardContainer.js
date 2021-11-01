@@ -1,22 +1,14 @@
 import axios from "axios";
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import useCardData from "./utils/useCardData";
 import Card from "./Card";
 
 const CardContainer = ({ id }) => {
   const [favorite, setFavorite] = useState(false);
-  const [data, setData] = useState({});
 
-  useEffect(() => {
-    axios
-      .get(`https://jsonplaceholder.typicode.com/photos/${id}`)
-      .then((res) => {
-        setData({
-          id: res.data.id,
-          title: res.data.title,
-          imageUrl: res.data.url,
-        });
-      });
-  }, [id]);
+  const { isLoading, data } = useCardData(id);
+
+  if (isLoading) return null;
 
   return (
     <Card
