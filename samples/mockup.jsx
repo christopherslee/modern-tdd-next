@@ -1,6 +1,6 @@
 <div className="rounded border shadow py-2 px-4 m-2 w-full max-w-xs inline-block">
   <h1 className="text-gray-700 my-2 font-semibold">This is the title</h1>
-  <img src="" className="rounded w-full h-40" alt="some picture" />
+  <img src="https://via.placeholder.com/300x200.png" className="rounded w-full h-40" alt="some picture" />
   <ul className="text-gray-400 mt-2">
     <li className="inline-block cursor-pointer">
       <svg
